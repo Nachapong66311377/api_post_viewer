@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class PostListScreen extends StatefulWidget {
   const PostListScreen({super.key});
 
@@ -40,9 +41,7 @@ class _PostListScreenState extends State<PostListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Posts from API'),
-      ),
+      appBar: AppBar(title: const Text('Posts from API')),
       body: FutureBuilder<List<Post>>(
         future: _futurePosts,
         builder: (context, snapshot) {
@@ -56,15 +55,33 @@ class _PostListScreenState extends State<PostListScreen> {
               itemBuilder: (context, index) {
                 Post post = snapshot.data![index];
                 return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 16,
+                  ),
                   elevation: 4,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      //crossAxisAlignment: CrossAxisAlignment.start,
+                      //mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              'User Id : ${post.userId}',
+                              textAlign: TextAlign.end,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                         Text(
                           '${post.id}. ${post.title}',
+                          textAlign: TextAlign.right,
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -91,4 +108,3 @@ class _PostListScreenState extends State<PostListScreen> {
     );
   }
 }
-
